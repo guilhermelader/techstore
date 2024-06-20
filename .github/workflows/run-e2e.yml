@@ -5,9 +5,6 @@ on: push
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
-    env:
-      APP_URL: ${{ secrets.APP_URL }}
-      NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,14 +43,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Install Cypress binary
-        run: npx cypress install
-
       - name: Verify Cypress binary
         run: npx cypress verify
-
-      - name: Build project
-        run: pnpm run build
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
